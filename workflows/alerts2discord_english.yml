@@ -1,7 +1,7 @@
 name: Send a Discord message when new RSS feeds update
 on:
   rss:
-    url: https://www.google.co.kr/alerts/feeds/09139258619343329046/10780903325456958943
+    url: https://www.google.co.kr/alerts/feeds/09139258619343329046/13614290289565164400
 jobs:
   discord:
     name: Send a message to discord
@@ -14,4 +14,4 @@ jobs:
           DISCORD_AVATAR: ${{ secrets.DISCORD_AVATAR_ENG }}
         uses: Ilshidur/action-discord@master
         with:
-          args: "'`'구글 알리미 - Migraine'`''\n'**${{on.rss.outputs.title}}**'\n'${{on.rss.outputs.link}}"
+          args: "'`'Google 알리미 - Migraine'`''\n'**${{on.rss.outputs.title}}**'\n'${{on.rss.outputs.link}}"
