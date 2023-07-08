@@ -1,0 +1,17 @@
+name: Send a Discord message when new RSS feeds update
+on:
+  rss:
+    url: https://www.google.co.kr/alerts/feeds/09139258619343329046/10780903325456958943
+jobs:
+  discord:
+    name: Send a message to discord
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_ENG }}
+          DISCORD_USERNAME: ${{ secrets.DISCORD_USERNAME_ENG }}
+          DISCORD_AVATAR: ${{ secrets.DISCORD_AVATAR_ENG }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: "'`'구글 알리미 - Migraine'`''\n'**${{on.rss.outputs.title}}**'\n'${{on.rss.outputs.link}}"
