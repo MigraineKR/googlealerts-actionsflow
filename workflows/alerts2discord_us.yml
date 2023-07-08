@@ -9,9 +9,9 @@ jobs:
     steps:
       - name: Discord notification
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_ENG }}
-          DISCORD_USERNAME: ${{ secrets.DISCORD_USERNAME_ENG }}
-          DISCORD_AVATAR: ${{ secrets.DISCORD_AVATAR_ENG }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_US }}
+          DISCORD_USERNAME: ${{ secrets.DISCORD_USERNAME_US }}
+          DISCORD_AVATAR: ${{ secrets.DISCORD_AVATAR_US }}
         uses: Ilshidur/action-discord@master
         with:
-          args: "'`'Google 알리미 - Migraine'`''\n'**${{on.rss.outputs.title}}**'\n'${{on.rss.outputs.link}}"
+          args: "'`'🇺🇸 Google 알리미 - Migraine'`''\n'**${{on.rss.outputs.title}}**'\n'${{on.rss.outputs.link}}"
