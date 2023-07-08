@@ -14,4 +14,4 @@ jobs:
           DISCORD_AVATAR: ${{ secrets.DISCORD_AVATAR_KR }}
         uses: Ilshidur/action-discord@master
         with:
-          args: "'`'🇰🇷 Google 알리미 - 편두통'`''\n'**${{on.rss.outputs.title}}**'\n'${{on.rss.outputs.link}}'\n'>>> ${{on.rss.outputs.description}}"
+          args: "'`'🇰🇷 Google 알리미 - 편두통'`''\n'**${{on.rss.outputs.title}}**'\n'${{on.rss.outputs.link}}'\n'>>> ${{on.rss.outputs.content}}"
