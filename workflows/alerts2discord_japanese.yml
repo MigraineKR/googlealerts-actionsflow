@@ -1,0 +1,17 @@
+name: Send a Discord message when new RSS feeds update
+on:
+  rss:
+    url: https://www.google.co.kr/alerts/feeds/09139258619343329046/17735552832884967998
+jobs:
+  discord:
+    name: Send a message to discord
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_JP }}
+          DISCORD_USERNAME: ${{ secrets.DISCORD_USERNAME_JP }}
+          DISCORD_AVATAR: ${{ secrets.DISCORD_AVATAR_JP }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: "'`'🇯🇵 Google 알리미 - 片頭痛'`''\n'**${{on.rss.outputs.title}}**'\n'${{on.rss.outputs.link}}"
