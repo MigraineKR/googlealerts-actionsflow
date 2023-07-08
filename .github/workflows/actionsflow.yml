@@ -1,7 +1,7 @@
 name: Actionsflow
 on:
-  # schedule:
-  #   - cron: "*/15 * * * *"
+  schedule:
+    - cron: "00 * * * *"
   push:
     branches:
       - main
@@ -26,7 +26,7 @@ jobs:
     name: Run
     concurrency: actionsflow
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Run Actionsflow
         uses: actionsflow/actionsflow-action@v1
         with:
@@ -37,3 +37,5 @@ jobs:
         uses: actionsflow/setup-act-for-actionsflow@v1
       - name: Run act
         run: act --workflows ./dist/workflows --secret-file ./dist/.secrets --eventpath ./dist/event.json --env-file ./dist/.env -P ubuntu-latest=actionsflow/act-environment:v1 -P ubuntu-18.04=actionsflow/act-environment:v1
+      - name: Keepalive
+        uses: gautamkrishnar/keepalive-workflow@v1
