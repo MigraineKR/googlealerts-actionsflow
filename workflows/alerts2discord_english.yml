@@ -4,9 +4,24 @@ on:
     url: https://www.google.co.kr/alerts/feeds/09139258619343329046/13614290289565164400
 jobs:
   discord:
-    name: Send a message to discord
     runs-on: ubuntu-latest
+    name: Send a message to discord
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.8'
+      
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Decode RSS Feed
+        id: rss_decoder
+        run: python ./rss_decoder.py ${{ github.event.inputs.url }}
+
       - name: Discord notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_US }}
@@ -14,4 +29,4 @@ jobs:
           DISCORD_AVATAR: ${{ secrets.DISCORD_AVATAR_US }}
         uses: Ilshidur/action-discord@master
         with:
-          args: "'`'🇺🇸 Google 알리미 - Migraine'`''\n'**${{on.rss.outputs.title}}**'\n'${{on.rss.outputs.link}}"
+          args: "`🇺🇸 Google 알리미 - Migraine`'\n'**${{ steps.rss_decoder.outputs.title }}**'\n'${{ steps.rss_decoder.outputs.link }}'\n'>>> ${{ steps.rss_decoder.outputs.content }}"
